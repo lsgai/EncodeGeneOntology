@@ -40,7 +40,7 @@ MAX_SEQ_LEN = 256
 os.chdir(args.main_dir)
 
 # added abs path, not in GOmultitask
-all_name_array = pd.read_csv("/local/datdb/goAndGeneAnnotationMar2017/go_name_in_obo.csv", header=None)
+all_name_array = pd.read_csv("go_name_in_obo.csv", header=None)
 all_name_array = list (all_name_array[0])
 args.num_label = len(all_name_array)
 
