@@ -6,13 +6,15 @@
 # use cosine similarity as objective function 
 word_mode='pretrained_aux' #'pretrained'
 
-# use pretrained BERT label embedding
+# use pretrained BERT label embedding, plus additional training
+echo 'running pretrained with no additional input dim'
+
 w2v_emb='/local/datdb/goAndGeneAnnotationMar2017/BERT_base_cased_tune_go_branch/fine_tune_lm_bioBERT/cosine.768.reduce300ClsVec/label_vector.txt'
 
 def_emb_dim='600' # input dimension to GCN (including any portion of embedding to be trained)
 pre_def_emb_dim='300' # how many dims are pretrained - used for file name, not arg
 aux_def_emb_dim='300' # how many dims to be trained
-n_epoch='10'
+n_epoch='200' # max epochs
 metric_option='cosine'
 nonlinear_gcnn='relu'
 
@@ -29,8 +31,8 @@ vocab_list='word_pubmed_intersect_GOdb.txt' # all vocab to be used, can be BERT 
 
 mkdir $work_dir/'GCN'
 
-# make results dir, e.g. cosine_pre300_aux300_epoch10
-result_folder=$work_dir/'GCN/'$metric_option'_pre'$pre_def_emb_dim'_aux'$aux_def_emb_dim'_epoch'$n_epoch #$def_emb_dim.'clsVec'
+# make results dir, e.g. cosine_pre300_aux300 #_epoch10
+result_folder=$work_dir/'GCN/debug'$metric_option'_pre'$pre_def_emb_dim'_aux'$aux_def_emb_dim #'_epoch'$n_epoch #$def_emb_dim.'clsVec'
 mkdir $result_folder
 
 # model_load=$result_folder/'best_state_dict.pytorch'
@@ -63,8 +65,6 @@ date
 
 #running pretrained with no additional input dim
 echo 'running pretrained with no additional input dim'
-
-# use cosine similarity as objective function 
 word_mode='pretrained'
 
 # use pretrained BERT label embedding
@@ -73,7 +73,7 @@ w2v_emb='/local/datdb/goAndGeneAnnotationMar2017/BERT_base_cased_tune_go_branch/
 def_emb_dim='600' # input dimension to GCN (including any portion of embedding to be trained)
 pre_def_emb_dim='300' # how many dims are pretrained - used for file name, not arg
 aux_def_emb_dim='300' # how many dims to be trained
-n_epoch='10'
+n_epoch='200' # max epochs
 metric_option='cosine'
 nonlinear_gcnn='relu'
 
@@ -90,7 +90,7 @@ vocab_list='word_pubmed_intersect_GOdb.txt' # all vocab to be used, can be BERT 
 
 mkdir $work_dir/'GCN'
 
-result_folder=$work_dir/'GCN/'$metric_option'_pre'$pre_def_emb_dim'_aux'$aux_def_emb_dim'_epoch'$n_epoch #$def_emb_dim.'clsVec'
+result_folder=$work_dir/'GCN/debug_'$metric_option'_pre'$pre_def_emb_dim'_aux'$aux_def_emb_dim #'_epoch'$n_epoch #$def_emb_dim.'clsVec'
 mkdir $result_folder
 
 # model_load=$result_folder/'best_state_dict.pytorch'

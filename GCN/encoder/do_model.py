@@ -65,7 +65,7 @@ args.num_label = len(all_name_array)
 print('num of names: %d' % args.num_label)
 
 ## **** load label description data ****
-
+# TODO load in label desc on cpu, compute avg using this and avepool function in encoder_model
 if args.w2v_emb is not None: ## we can just treat each node as a vector without word description 
 
   Vocab = load_vocab(args.vocab_list) # all words found in pubmed and trained in w2v ... should trim down

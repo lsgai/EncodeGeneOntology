@@ -25,7 +25,8 @@ from pytorch_pretrained_bert.tokenization import BertTokenizer, load_vocab
 from torch_geometric.data import Data
 from torch_geometric.nn import GCNConv
 
-sys.path.append("/local/datdb/GOmultitask")
+#sys.path.append("/local/datdb/GOmultitask")
+sys.path.append("/local/lgai/EncodeGeneOntology")
 
 import biLSTM.encoder.arg_input as arg_input
 args = arg_input.get_args()
@@ -37,10 +38,9 @@ import biLSTM.encoder.bi_lstm_model as bi_lstm_model
 
 MAX_SEQ_LEN = 256
 
-os.chdir(args.main_dir)
+os.chdir(args.main_dir) # directory where it looks for files, e.g. the go_name_in_obo.csv
 
-# added abs path, not in GOmultitask
-all_name_array = pd.read_csv("go_name_in_obo.csv", header=None)
+all_name_array = pd.read_csv('go_name_in_obo.csv', header=None)
 all_name_array = list (all_name_array[0])
 args.num_label = len(all_name_array)
 

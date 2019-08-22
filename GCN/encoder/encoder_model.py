@@ -129,6 +129,8 @@ class encoder_model (nn.Module) :
 
   def make_optimizer (self):
     if self.args.fix_word_emb: # use this option to freeze embedding
+      #TODO
+      print([n for n,p in self.named_parameters () if "label_embedding" not in n])
       return torch.optim.Adam ( [p for n,p in self.named_parameters () if "label_embedding" not in n] , lr=self.args.lr )
     else:
       return torch.optim.Adam ( self.parameters(), lr=self.args.lr )
@@ -164,7 +166,14 @@ class encoder_model (nn.Module) :
         ## predict if 2 labels are similar ? ... sort of doing the same thing as gcn already does
         loss, _ = self.metric_module.forward(label_emb[label_id_number_left], label_emb[label_id_number_right], true_label=label_ids.cuda())
 
+
         loss.backward()
+        print('gradient after update TODO:')
+        print(self.label_embedding.weight) 
+        print(torch.sum(torch.abs(self.label_embedding.weight.grad)))
+        print('aux')
+        print(self.aux_label_embedding.weight)
+        print(torch.sum(torch.abs(self.aux_label_embedding.weight.grad)))
         optimizer.step()
         optimizer.zero_grad()
 
