@@ -14,10 +14,10 @@ data_dir=$server/'goAndGeneAnnotationMar2017/entailment_data/AicScore/go_bert_cl
 
 w2v_emb=$work_dir'/word_pubmed_intersect_GOdb_w2v_pretrained.pickle'
 vocab_list=$work_dir'/word_pubmed_intersect_GOdb.txt' # all vocab to be used, can be BERT or something, so we don't hardcode 
-label_desc_dir=$work_dir/'go_def_in_obo.tsv'
-
 
 result_folder=$work_dir/$metric_option'.bilstm.300Vec' #
+label_desc_dir=$result_folder #$work_dir/'go_def_in_obo.tsv' # in do_model, label_desc_dir is where to write label, not where to look for description
+
 mkdir $result_folder
 
 #conda activate tensorflow_gpuenv
@@ -41,10 +41,10 @@ data_dir=$server/'goAndGeneAnnotationMar2017/entailment_data/AicScore/go_bert_cl
 
 w2v_emb=$work_dir'/word_pubmed_intersect_GOdb_w2v_pretrained.pickle'
 vocab_list=$work_dir'/word_pubmed_intersect_GOdb.txt' # all vocab to be used, can be BERT or something, so we don't hardcode 
-label_desc_dir=$work_dir/'go_def_in_obo.tsv'
-
 
 result_folder=$work_dir/$metric_option'.bilstm.300Vec_2017' #
+label_desc_dir=$result_folder #$work_dir/'go_def_in_obo.tsv'
+
 mkdir $result_folder
 
 #conda activate tensorflow_gpuenv
@@ -67,10 +67,10 @@ data_dir=$server/'goAndGeneAnnotationMar2017/entailment_data/AicScore/go_bert_cl
 
 w2v_emb=$work_dir'/word_pubmed_intersect_GOdb_w2v_pretrained.pickle'
 vocab_list=$work_dir'/word_pubmed_intersect_GOdb.txt' # all vocab to be used, can be BERT or something, so we don't hardcode 
-label_desc_dir=$work_dir/'go_def_in_obo.tsv'
-
 
 result_folder=$work_dir/$metric_option'.bilstm.300Vec_deepgo' #
+label_desc_dir=$result_folder #$work_dir/'go_def_in_obo.tsv'
+
 mkdir $result_folder
 
 #conda activate tensorflow_gpuenv

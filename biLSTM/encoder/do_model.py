@@ -137,13 +137,15 @@ if args.epoch > 0 : ## here we do training
 ## write out the vector as .txt (same as bert do_model)
 
 if args.write_vector: 
+  output_fname = os.path.join(args.result_folder,"label_vector_bilstm_%s.txt" % args.metric_option)
   print ('\n\nwrite GO vectors into text, using format of python gensim library')
+  print('\nwill write to %s...\n' % output_fname )
+
   AllLabelDesc = data_loader.LabelProcessorForWrite ()
   examples = AllLabelDesc.get_examples( args.label_desc_dir ) ## file @label_desc_dir is tab delim 
   examples = data_loader.convert_label_desc_to_features ( examples , MAX_SEQ_LEN, tokenizer )
   AllLabelLoader, GO_names = data_loader.label_loader_for_write(examples,64) ## should be able to handle 64 labels at once 
-  output_fname = AllLabelLoader,os.path.join(args.result_folder,"label_vector_bilstm_%s.txt" % args.metric_option)
-  label_emb = model.write_label_vector( output_fname, GO_names )
+  label_emb = model.write_label_vector( AllLabelLoader, output_fname, GO_names )
   print('\nwrote GO vectors to %s\n' % output_fname )
 
 

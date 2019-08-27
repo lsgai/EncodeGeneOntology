@@ -57,6 +57,7 @@ all_name_array = pd.read_csv("go_name_in_obo.csv", header=None)
 all_name_array = list (all_name_array[0])
 
 args.num_label = len(all_name_array)
+print('args.num_label %d TODO' % args.num_label)
 
 ## **** load label description data ****
 
@@ -122,11 +123,13 @@ other_params = {'dropout': 0.2,
 
 pretrained_weight = None
 if args.w2v_emb is not None:
-  pretrained_weight = pickle.load(open(args.w2v_emb,'rb'))
+  pretrained_weight = pickle.load(open(args.w2v_emb,'rb')) 
 
   try: ## load standard pickle that is already in numpy
     pretrained_weight.shape[0] ## will throw error if load in file is not a matrix
+
   except: ## onto2vec is dictionary {go:vec}
+    print('pretrained_weight: loaded in file not a matrix exception TODO')
     temp = np.zeros((len(all_name_array), args.def_emb_dim ))
     for index,go in enumerate (all_name_array):  ## must keep this exact order
       if go not in pretrained_weight: 
@@ -134,11 +137,12 @@ if args.w2v_emb is not None:
       # enforce strict "GO:xyz" but onto2vec doesn't have this
       temp[index] = pretrained_weight[go]
 
-    ## now we get word dim and so forth
+  # TODO this whole block was indented in github code
+  ## now we get word dim and so forth
     pretrained_weight = temp ## override
-    other_params ['num_of_word'] = pretrained_weight.shape[0]
-    other_params ['word_vec_dim'] = pretrained_weight.shape[1]
-    other_params ['pretrained_weight'] = pretrained_weight
+  other_params ['num_of_word'] = pretrained_weight.shape[0]
+  other_params ['word_vec_dim'] = pretrained_weight.shape[1]
+  other_params ['pretrained_weight'] = pretrained_weight
 
 
 
